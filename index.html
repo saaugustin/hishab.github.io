@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- SEO -->
+    <title>৩০% হিসাব ক্যালকুলেটর | Hishab</title>
+    <meta name="description" content="বাংলায় সহজ ও সুন্দর ৩০% হিসাব ক্যালকুলেটর। একাধিক সংখ্যা যোগ করে ৩০% শেয়ার ও অবশিষ্ট টাকা বের করুন।" />
+    <meta name="keywords" content="হিসাব, ৩০% হিসাব, Bangla calculator, percentage calculator" />
+    <meta name="author" content="Hishab" />
+    <link rel="canonical" href="https://hishab.me" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="৩০% হিসাব ক্যালকুলেটর | Hishab" />
+    <meta property="og:description" content="বাংলায় ৩০% হিসাব করার সহজ ও সুন্দর টুল" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hishab.me" />
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon (optional) -->
+    <link rel="icon" href="favicon.ico">
+
+    <style>
+        :root {
+            --primary: #667eea;
+            --accent: #ff7a18;
+            --success: #2ecc71;
+            --text: #1e3c72;
+            --soft: #f0f3ff;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Noto Sans Bengali', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2, #4facfe);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 440px;
+            background: linear-gradient(180deg, #fff, var(--soft));
+            border-radius: 28px;
+            padding: 30px 26px;
+            box-shadow: 0 30px 70px rgba(0,0,0,.35);
+            animation: fade .6s ease;
+            text-align: center;
+        }
+
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            margin: 0 0 6px;
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sub {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 18px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 16px;
+            border-radius: 14px;
+            border: 1px solid #ccd3ff;
+            outline: none;
+            margin-bottom: 6px;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(102,126,234,.25);
+        }
+
+        .hint {
+            font-size: 12px;
+            color: #666;
+            text-align: left;
+            margin-bottom: 12px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 8px;
+            transition: .2s;
+        }
+
+        .btn-add {
+            background: linear-gradient(135deg, var(--accent), #ffb347);
+        }
+
+        .btn-calc {
+            background: linear-gradient(135deg, var(--success), #27ae60);
+        }
+
+        .btn-reset {
+            background: #444;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(0,0,0,.25);
+        }
+
+        .box {
+            margin-top: 10px;
+            padding: 14px 16px;
+            background: #fff;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 6px 16px rgba(0,0,0,.12);
+            font-size: 15px;
+        }
+
+        .total { border-left: 6px solid var(--primary); }
+        .share { border-left: 6px solid var(--accent); }
+        .remain { border-left: 6px solid var(--success); }
+
+        .val {
+            font-weight: 700;
+            font-size: 17px;
+            color: var(--text);
+        }
+
+        .progress {
+            margin-top: 14px;
+            height: 10px;
+            background: #e0e6ff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent), var(--success));
+            transition: width .4s ease;
+        }
+
+        footer {
+            margin-top: 14px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        footer span {
+            font-weight: 600;
+            color: var(--text);
+        }
+    </style>
+</head>
+<body>
+
+<main class="card">
+    <h1>💰 ৩০% হিসাব</h1>
+    <p class="sub">সহজ Bangla ক্যালকুলেটর</p>
+
+    <input id="input" type="text" placeholder="যেমন: 500 + 300 + 25">
+    <div class="hint">একাধিক সংখ্যা + দিয়ে লিখুন</div>
+
+    <button class="btn-add" onclick="add()">সংখ্যা যোগ করুন</button>
+
+    <div class="box total">
+        <span>মোট</span>
+        <span class="val" id="total">0</span>
+    </div>
+
+    <button class="btn-calc" onclick="calc()">৩০% হিসাব দেখুন</button>
+
+    <div class="box share">
+        <span>৩০% শেয়ার</span>
+        <span class="val" id="share">0</span>
+    </div>
+
+    <div class="box remain">
+        <span>অবশিষ্ট</span>
+        <span class="val" id="remain">0</span>
+    </div>
+
+    <div class="progress">
+        <div class="bar" id="bar"></div>
+    </div>
+
+    <button class="btn-reset" onclick="resetAll()">রিসেট</button>
+
+    <footer>Made with ❤️ — <span>Hishab</span></footer>
+</main>
+
+<script>
+    var total = 0;
+
+    function add() {
+        var input = document.getElementById('input');
+        var text = input.value;
+        if (!text) return alert('সংখ্যা লিখুন');
+
+        var parts = text.split('+');
+        var sum = 0;
+
+        for (var i = 0; i < parts.length; i++) {
+            var n = parseFloat(parts[i].trim());
+            if (isNaN(n)) return alert('ভুল ইনপুট');
+            sum += n;
+        }
+
+        total += sum;
+        document.getElementById('total').innerText = total.toFixed(2);
+        input.value = '';
+    }
+
+    function calc() {
+        var s = total * 0.30;
+        document.getElementById('share').innerText = s.toFixed(2);
+        document.getElementById('remain').innerText = (total - s).toFixed(2);
+        document.getElementById('bar').style.width = '30%';
+    }
+
+    function resetAll() {
+        total = 0;
+        document.getElementById('total').innerText = '0';
+        document.getElementById('share').innerText = '0';
+        document.getElementById('remain').innerText = '0';
+        document.getElementById('bar').style.width = '0%';
+    }
+
+    document.getElementById('input').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') add();
+    });
+</script>
+
+</body>
+</html>
